@@ -5,50 +5,38 @@ import Editable from './Editable';
 import Blocks from './Blocks';
 
 const StyledButton = styled.button`
-  // float: left;
 `;
 
-const StyledList = styled.ul`
-  list-style-type: none;
-  white-space:nowrap;
+const BlocksUl = styled.ul`
   display: flex;
-  flex-direction: row;
-  margin: 0;
-  padding: 0;
+  list-style: none;
 `;
 
-const StyledUl = styled.ul`
-  list-style-type: none;
-  
+const LanesUl = styled.ul`
+  list-style: none;
 `;
 
-const StyLI = styled.li`
-  display: block;
-  float: left;
-  border: 2px solid purple;
-`;
-
-const Stli = styled.li`
-  display: flex;
+const Lanesli = styled.li`
+  display: flex; /** Button align */
 `;
 
 class Lanes extends Component {
   render() {
     const { lanes, editBlock = () => { }, addBlock = () => { }, activateBlock = () => { }, deleteBlock = ()=> {} } = this.props;
     return (
-      <StyledUl>
+      <LanesUl>
         {lanes.map(({ lid, lname, blocks, laneEdit }) => (
-          <Stli key={lid}>
-            <StyledList>
-              <Block onClick={activateBlock.bind(null, [lid, 0])}>
+          <Lanesli key={lid} className='List'>
+            <BlocksUl>
+              <li><Block onClick={activateBlock.bind(null, [lid, 0])}>
                 <Editable Name={lname} editBlock={editBlock.bind(null, [lid, 0])} isEditing={laneEdit} head={true}/>
-              </Block>
+              </Block></li>
               <Blocks laneId={lid} blocks={blocks} activateBlock={activateBlock} editBlock={editBlock} deleteBlock={deleteBlock} head={false} />
-            </StyledList>
+            </BlocksUl>
             <StyledButton className='add-block' onClick={addBlock.bind(null, lid)}>+</StyledButton>
-          </Stli>
+          </Lanesli>
         ))}
-      </StyledUl>
+      </LanesUl>
     );
   }
 }

@@ -6,8 +6,9 @@ import Save from '../Save';
 import Load from '../Load';
 
 const StyledButton = styled.button`
-  display: inline;
-  float: left;
+`;
+
+const StyledSpan = styled.span`
 `;
 
 class Main extends Component {
@@ -51,12 +52,10 @@ class Main extends Component {
     const { lanes } = this.state;
     return (
       <div>  
-      <span>
+      <StyledSpan>
         <button className='add-lane' onClick={this.addLane}>New Lane</button>
         <Lanes lanes={lanes} activateBlock={this.activateBlock} addBlock={this.addBlock} editBlock={this.editBlock} deleteBlock={this.deleteBlock}/>
-        {/* <Blocks blocks={blocks} activateBlock={this.activateBlock} editBlock={this.editBlock} deleteBlock={this.deleteBlock}/> */}
-        {/* <StyledButton className='add-block' onClick={this.addBlock}>+</StyledButton> */}
-      </span>
+      </StyledSpan>
       <div>
         <Save info={this.state}/>
         <Load loadData={this.loadData}/>
@@ -75,7 +74,6 @@ class Main extends Component {
     this.setState(
       {
         lanes: this.state.lanes.map(lane => {
-          console.log(lane.lid);
           if(lid!==undefined && lane.lid === lid){
             lane.blocks = lane.blocks.concat({
               bid: uuid.v4(),

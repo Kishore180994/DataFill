@@ -3,30 +3,27 @@ import Block from './Block';
 import styled from '@emotion/styled';
 import Editable from './Editable';
 
-const StyledList = styled.ul`
-  list-style-type: none;
-  white-space:nowrap;
-  margin: 0;
-  padding: 0;
+const StyledList = styled.div`
+  overflow: auto;
 `;
 
-const StyLI = styled.li`
-  display: block;
+const BlocksLI = styled.li`
+  display: inline;
   float: left;
-  border: 2px solid purple;
+  border: 2px solid black;
 `;
 
 const Blocks = ({ laneId, blocks, activateBlock = () => { }, editBlock = () => { }, deleteBlock = () => { } }) => {
   return (
-    <StyledList className='blocks'>
+    <div>
       {blocks.map(({ bid, bname, color, width, isEditing }) => (
-        <StyLI key={bid}>
+        <BlocksLI key={bid}>
           <Block onClick={activateBlock.bind(null, [laneId, bid])} >
             <Editable Name={bname} Width={width} Color={color} editBlock={editBlock.bind(null, [laneId, bid])} deleteBlock={deleteBlock.bind(null, [laneId, bid])} isEditing={isEditing} />
           </Block>
-        </StyLI>
+        </BlocksLI>
       ))}
-    </StyledList>
+    </div>
   );
 };
 
